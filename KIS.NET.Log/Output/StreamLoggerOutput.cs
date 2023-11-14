@@ -9,69 +9,89 @@ namespace KIS.NET.Log.Output
     /// A class used to output log messages to stream objects.
     /// </summary>
     public class StreamLoggerOutput :
-        ILoggerOutput<Stream>,
-        ISimpleLoggerOutput<Stream>,
-        ILoggerOutputBase,
-        IAsyncLoggerOutput<Stream>
+        ILoggerOutput<Stream>
     {
-        private Encoding m_EncodingToUse;
+        private Encoding m_encodingToUse;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:KIS.NET.Log.Output.StreamLoggerOutput" /> class.
         /// </summary>
         public StreamLoggerOutput()
         {
-            m_EncodingToUse = Constants.DefaultEncoding;
+            m_encodingToUse = Constants.DefaultEncoding;
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:KIS.NET.Log.Output.StreamLoggerOutput" /> class.
         /// </summary>
-        /// <param name="i_Encoding">Encoding to use on output.</param>
-        public StreamLoggerOutput(Encoding i_Encoding)
+        /// <param name="encoding">Encoding to use on output.</param>
+        public StreamLoggerOutput(Encoding encoding)
         {
-            m_EncodingToUse = Constants.DefaultEncoding;
-            EncodingToUse = i_Encoding;
+            m_encodingToUse = Constants.DefaultEncoding;
+            EncodingToUse = encoding;
         }
 
         /// <summary>
         /// Interacts with the system using the given output target,
         /// while using the given log message a parameter.
         /// </summary>
-        /// <param name="i_LogMessage">Log's fully constructed message, including all wrapping formats.</param>
-        /// <param name="i_OutputTarget">Some output target for the log message,
+        /// <param name="logMessage">Log's fully constructed message, including all wrapping formats.</param>
+        /// <param name="outputTarget">Some output target for the log message,
         /// possibly a stream or a file's path.</param>
-        public void OutputLog(string i_LogMessage, Stream i_OutputTarget)
+        public void OutputLog(string logMessage, Stream outputTarget)
         {
-            if (i_LogMessage == null)
+            if (logMessage == null)
             {
-                throw new ArgumentNullException(nameof(i_LogMessage), "Message to log can't be null");
+                throw new ArgumentNullException(nameof(logMessage), "Message to log can't be null");
             }
 
-            if (string.IsNullOrEmpty(i_LogMessage))
+            if (string.IsNullOrEmpty(logMessage))
             {
-                throw new ArgumentException("Message to log can't be empty", nameof(i_LogMessage));
+                throw new ArgumentException("Message to log can't be empty", nameof(logMessage));
             }
 
-            if (i_OutputTarget == null)
+            if (outputTarget == null)
             {
-                throw new ArgumentNullException(nameof(i_OutputTarget), "Stream to log to can't be null");
+                throw new ArgumentNullException(nameof(outputTarget), "Stream to log to can't be null");
             }
 
-            if (!i_OutputTarget.CanWrite)
+            if (!outputTarget.CanWrite)
             {
-                throw new ArgumentException("Given stream has no writing abilities", nameof(i_OutputTarget));
+                throw new ArgumentException("Given stream has no writing abilities", nameof(outputTarget));
             }
 
-            var streamWriter = new StreamWriter(i_OutputTarget, EncodingToUse);
+            var streamWriter = new StreamWriter(outputTarget, EncodingToUse);
             streamWriter.AutoFlush = true;
-            streamWriter.WriteLine(i_LogMessage);
+            streamWriter.WriteLine(logMessage);
         }
 
-
-        public Task OutputLogAsync(string logMessage, Stream outputTarget)
+        public async Task OutputLogAsync(string logMessage, Stream outputTarget)
         {
-            throw new NotImplementedException();
+            if (logMessage == null)
+            {
+                throw new ArgumentNullException(nameof(logMessage), "Message to log can't be null");
+            }
+
+            if (string.IsNullOrEmpty(logMessage))
+            {
+                throw new ArgumentException("Message to log can't be empty", nameof(logMessage));
+            }
+
+            if (outputTarget == null)
+            {
+                throw new ArgumentNullException(nameof(outputTarget), "Stream to log to can't be null");
+            }
+
+            if (!outputTarget.CanWrite)
+            {
+                throw new ArgumentException("Given stream has no writing abilities", nameof(outputTarget));
+            }
+
+            using (var streamWriter = new StreamWriter(outputTarget, EncodingToUse))
+            {
+                streamWriter.AutoFlush = true;
+                await streamWriter.WriteLineAsync(logMessage);
+            }
         }
 
         /// <summary>
@@ -79,8 +99,8 @@ namespace KIS.NET.Log.Output
         /// </summary>
         public Encoding EncodingToUse
         {
-            get => m_EncodingToUse;
-            set => m_EncodingToUse = value;
+            get => m_encodingToUse;
+            set => m_encodingToUse = value;
         }
     }
 }
