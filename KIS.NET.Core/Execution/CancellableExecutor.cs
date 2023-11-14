@@ -13,7 +13,7 @@ namespace KIS.NET.Core.Execution
         public Task<TResult> Execute<TResult>(Func<CancellationToken, TResult> function,
             CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.Run(() => function(cancellationToken), cancellationToken);
         }
 
         Task ICancellableExecutor<CancellationToken>.Execute(Action<CancellationToken> action,
