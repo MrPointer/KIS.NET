@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KIS.NET.Core", "KIS.NET.Core\KIS.NET.Core.csproj", "{DD82EAFF-CA7B-49DD-99CA-2383DEA9A443}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KIS.NET.Log", "KIS.NET.Log\KIS.NET.Log.csproj", "{7E6D81DB-F885-4A89-BCD8-EB8EAC631934}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KIS.NET.IO", "KIS.NET.IO\KIS.NET.IO.csproj", "{9012F41D-3D36-4970-8F66-D697A3369CFF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD82EAFF-CA7B-49DD-99CA-2383DEA9A443}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD82EAFF-CA7B-49DD-99CA-2383DEA9A443}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD82EAFF-CA7B-49DD-99CA-2383DEA9A443}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD82EAFF-CA7B-49DD-99CA-2383DEA9A443}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E6D81DB-F885-4A89-BCD8-EB8EAC631934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E6D81DB-F885-4A89-BCD8-EB8EAC631934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E6D81DB-F885-4A89-BCD8-EB8EAC631934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E6D81DB-F885-4A89-BCD8-EB8EAC631934}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9012F41D-3D36-4970-8F66-D697A3369CFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9012F41D-3D36-4970-8F66-D697A3369CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9012F41D-3D36-4970-8F66-D697A3369CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9012F41D-3D36-4970-8F66-D697A3369CFF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
